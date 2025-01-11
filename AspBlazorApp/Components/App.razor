@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@rendermode RenderMode.InteractiveServer
+
+@page "/"
+
+
+<!DOCTYPE html>
+<html>
+<head><title></title></head>
+<body>
+
+    <h3>@header</h3>
+    @* <Home Title="Parent parameter" /> *@
+    <Mouse OnMouseMoveHandler="@mouseHandler" />
+    <div>@str</div>
+
+    <script src="_framework/blazor.web.js"></script>
+</body>
+</html>
+
+
+
+
+@code {
+        string header = "Hello Empty Blazor";
+
+        List<string> skills = new() { "C++", "Java" };
+
+        Dictionary<string, object> attrs { set; get; } = 
+            new ()
+        {
+            {"type", "number"},
+            {"min", "16"},
+            {"max", "65"},
+            {"placeholder", "input age"},
+            {"style", "color: red; width: 200px;"},
+        };
+
+        string str = "rwerwere";
+
+        void mouseHandler(MouseEventArgs e)
+        {
+            str = $@"<h3>Mouse</h3>
+            <p>Client<br />x: {e.ClientX}, y: {e.ClientY}</p>
+            <p>Offset<br />x: {e.OffsetX}, y: {e.OffsetY}</p>
+        <p>Page<br />x: {e.PageX}, y: {e.PageY}</p>
+        <p>Screen<br />x: {e.ScreenX}, y: {e.ScreenY}</p>";
+    }
+}

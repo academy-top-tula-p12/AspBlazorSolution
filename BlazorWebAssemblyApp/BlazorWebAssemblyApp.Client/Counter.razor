@@ -1,0 +1,17 @@
+﻿@page "/counter"
+@rendermode InteractiveWebAssembly
+
+
+<h3>Counter</h3>
+
+<h4>Count: @count</h4>
+<button @onclick="CountInc">Click for Inc</button>
+
+@code {
+    int count = 0;
+
+    void CountInc()
+    {
+        count++;
+    }
+}

@@ -1,0 +1,7 @@
+﻿<h3>Form</h3>
+<input @attributes="Attrs" />
+
+@code {
+    [Parameter]
+    public Dictionary<string, object> Attrs { set; get; } = new();
+}

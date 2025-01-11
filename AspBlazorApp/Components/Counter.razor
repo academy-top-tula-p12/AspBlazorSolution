@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@rendermode RenderMode.InteractiveServer
+
+
+
+<h3>Counter @counter</h3>
+
+<button @onclick="IncCounter">++</button>
+<button @onclick="DecCounter">--</button>
+
+@code {
+    int counter = 0;
+
+    void IncCounter(MouseEventArgs e)
+    {
+        if (e.CtrlKey) counter += 10;
+        else counter++;
+    }
+
+    void DecCounter()
+    {
+        counter--;
+    }
+}

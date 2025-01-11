@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@rendermode RenderMode.InteractiveServer
+
+<style>
+    #canvas {margin: 20px; width:300px; height:300px; background: gray;}
+</style>
+@* <div id="canvas" @onmousemove="MouseInfo"></div> *@
+<div id="canvas" @onmousemove="OnMouseMoveHandler"></div>
+
+
+@code {
+    double clientX, clientY, offsetX, offsetY, pageX, pageY, screenX, screenY;
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnMouseMoveHandler { set; get; }
+
+    // void MouseInfo(MouseEventArgs e)
+    // {
+    //     clientX = e.ClientX;
+    //     clientY = e.ClientY;
+    //     offsetX = e.OffsetX;
+    //     offsetY = e.OffsetY;
+    //     pageX = e.PageX;
+    //     pageY = e.PageY;
+    //     screenX = e.ScreenX;
+    //     screenY = e.ScreenY;
+    // }
+}

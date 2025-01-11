@@ -1,0 +1,32 @@
+﻿@using AspBlazorApp.Components
+
+<h3>@header</h3>
+<h4>@Title</h4>
+
+@* <ul> *@
+@*     @foreach(var item in Items) *@
+@*     { *@
+@*         <li>@item</li> *@
+@*     } *@
+@* </ul> *@
+
+
+
+@* <div> *@
+@*     @ChildContent *@
+@* </div> *@
+
+<Counter />
+
+@code {
+    string header = "Home Component";
+
+    [Parameter]
+    public string Title { set; get; } = "Default parameter";
+
+    [Parameter]
+    public List<string> Items { set; get; } = new();
+
+    [Parameter]
+    public RenderFragment? ChildContent { set; get; }
+}
