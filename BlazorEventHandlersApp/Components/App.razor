@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="BlazorEventHandlersApp.styles.css" /> 
+    <HeadOutlet />
+</head>
+
+<body>
+    @* <Routes /> *@
+    <h2>Count: @count</h2>
+
+    <CounterNew Increment="IncrementHandler"
+                Decrement="DecremetHandler" />
+
+    @code {
+        int count = 0;
+        void IncrementHandler(MouseEventArgs e)
+        {
+            if (e.CtrlKey)
+                count += 10;
+            else
+                count++;
+        }
+
+        void DecremetHandler()
+        {
+            count--;
+        }
+    }
+
+
+    <script src="_framework/blazor.web.js"></script>
+</body>
+
+</html>
+

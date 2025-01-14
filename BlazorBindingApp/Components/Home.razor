@@ -1,0 +1,90 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Components.Web
+@rendermode RenderMode.InteractiveServer
+
+<style>
+    div{
+    margin: 20px;
+    }
+</style>
+
+<PageTitle>Home</PageTitle>
+
+<h1>Home component</h1>
+<div>
+    <input type="number" @bind="@number" @bind:event="oninput"/>
+</div>
+<div>
+    <input type="text" @bind="@divStyle" @bind:event="oninput" />
+</div>
+<div style="@divStyle">
+    Value of input: @number
+</div>
+
+<div>
+    <input type="text" @bind="@searchString" @bind:after="FindCities" @bind:event="oninput" />
+</div>
+<div>
+    <ul>
+        @foreach (var c in findsCities)
+        {
+            <li>@c</li>
+        }
+    </ul>
+</div>
+
+<div>
+    <input type="number" @bind:get="age" @bind:set="SetAge" />
+</div>
+
+<div>
+    <input type="number" @bind="Day" />
+</div>
+
+<div>
+    <label>Search Cities:</label>
+    <input type="text" @bind="@searchCity" @bind:event="oninput" />
+</div>
+<FindsCities SearchString="@searchCity"/>
+
+
+@code{
+    int number = 0;
+    string divStyle = "background-color: red; width: 200px; height: 100px;";
+
+    string searchString = "";
+
+    List<string> cities = new() { "Москва", "Тула", "Новосибирск", "Туапсе", "Моршанск", "Новгород", "Тулун" };
+
+    List<string> findsCities = new();
+
+    async Task FindCities()
+    {
+        await Task.Delay(500);
+        findsCities = cities.Where(c => c.Contains(searchString)).ToList();
+    }
+
+    int age = 16;
+
+    void SetAge(int value)
+    {
+        if (value > 0 && value < 100)
+            age = value;
+    }
+
+    int day = 1;
+
+    int Day
+    {
+        get => day;
+        set
+        {
+            if (value > 0 && value < 32) day = value;
+        }
+    }
+
+
+    string searchCity = "";
+
+
+}

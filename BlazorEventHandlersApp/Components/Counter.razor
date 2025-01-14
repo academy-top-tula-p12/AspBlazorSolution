@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@rendermode RenderMode.InteractiveServer
+
+<h3>Counter @count</h3>
+
+<button @onclick="Increment">Increment</button>
+<button @onclick="Decremet">Decremet</button>
+
+@code {
+    int count = 0;
+
+    void Increment(MouseEventArgs e)
+    {
+        if (e.CtrlKey) 
+            count += 10;
+        else
+            count++;
+    }
+
+    void Decremet()
+    {
+        count--;
+    }
+}

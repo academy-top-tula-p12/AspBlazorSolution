@@ -1,0 +1,28 @@
+﻿@page "/"
+
+@rendermode RenderMode.InteractiveServer
+
+
+<PageTitle>Home</PageTitle>
+
+<h2>Count: @count</h2>
+
+<CounterNew Increment="IncrementHandler"
+            Decrement="DecremetHandler"/>
+
+@code {
+    int count = 0;
+    void IncrementHandler(MouseEventArgs e)
+    {
+        if (e.CtrlKey)
+            count += 10;
+        else
+            count++;
+    }
+
+    void DecremetHandler()
+    {
+        count--;
+    }
+}
+

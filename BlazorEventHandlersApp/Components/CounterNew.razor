@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@rendermode RenderMode.InteractiveServer
+
+<button @onclick="Increment">Increment</button>
+<button @onclick="Decrement">Decrement</button>
+
+@code {
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> Increment { set; get; }
+    [Parameter]
+    public EventCallback Decrement { set; get; }
+
+    private async Task IncAsync()
+    {
+        await Increment.InvokeAsync();
+    }
+}
+

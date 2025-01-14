@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@rendermode RenderMode.InteractiveServer
+
+<h3>FindsCities</h3>
+<div>
+    <ul>
+        @foreach (var c in findsCities)
+        {
+            <li>@c</li>
+        }
+    </ul>
+</div>
+
+@code {
+
+
+    string searchString = null!;
+
+    [Parameter]
+    public string SearchString 
+    { 
+        set
+        {
+            searchString = value;
+            FindCities();
+        }
+        get => searchString;
+    }
+
+    protected override void OnInitialized()
+    {
+        searchString = "";
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
+
+    List<string> cities = new() { "Москва", "Тула", "Новосибирск", "Туапсе", "Моршанск", "Новгород", "Тулун" };
+
+    List<string> findsCities = new();
+
+    void FindCities()
+    {
+        //await Task.Delay(500);
+        findsCities = cities.Where(c => c.Contains(searchString)).ToList();
+    }
+}

@@ -1,0 +1,24 @@
+﻿@rendermode RenderMode.InteractiveServer
+<style>
+    .canvas{
+    width: 200px;
+    height: 200px;
+    background-color: darkgray;
+    margin: 20px;
+    }
+</style>
+
+
+<h3>Canvas</h3>
+<div class="canvas" @onmousemove="clickHandler"></div>
+<p>x: @clientX, y: @clientY</p>
+
+@code {
+    double clientX, clientY;
+
+    void clickHandler(MouseEventArgs e)
+    {
+        clientX = e.ClientX;
+        clientY = e.ClientY;
+    }
+}
