@@ -1,0 +1,74 @@
+﻿@page "/employee"
+
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Forms
+
+@rendermode RenderMode.InteractiveServer
+
+<style>
+    div{
+        margin: 20px;
+    }
+</style>
+
+<h3>Employee</h3>
+
+<form>
+    <div>
+        <label>Name:</label><br />
+        <InputText @bind-Value="employee.Name" />
+    </div>
+
+    <div>
+        <label>Birth Date:</label><br />
+        <InputDate @bind-Value="employee.BirthDate" />
+    </div>
+
+    <div>
+        <label>Salary:</label><br />
+        <InputNumber @bind-Value="employee.Salary" />
+    </div>
+
+    <div>
+        <label>Married:</label>
+        <InputCheckbox @bind-Value="employee.Married" />
+    </div>
+
+    <div>
+        <InputRadioGroup @bind-Value="employee.Gender">
+            <label>Gender:</label><br />
+            @foreach(var g in genders)
+            {
+                <InputRadio Value="@g" />@g<br />
+            }
+        </InputRadioGroup>
+    </div>
+
+    <div>
+        <label>Skills:</label><br />
+        <InputSelect @bind-Value="employee.Skills" multiple>
+            @foreach(var s in skills)
+            {
+                <option value="@s">@s</option>
+            }
+        </InputSelect>
+    </div>
+</form>
+
+<hr />
+
+<div>
+    <p>Name: @employee.Name</p>
+    <p>Birth Date: @employee.BirthDate.ToLongDateString()</p>
+    <p>Salary: @employee.Salary</p>
+    <p>Married: @((employee.Married) ? "Yes" : "No")</p>
+    <p>Gender: @employee.Gender</p>
+    <p>Skills: @String.Join(", ", employee.Skills)</p>
+</div>
+
+
+@code {
+    Models.Employee employee = new();
+    List<string> genders = new() { "Male", "Female" };
+    List<string> skills = new() { "C++", "C#", "JavaScript", "Sql" };
+}

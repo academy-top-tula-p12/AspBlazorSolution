@@ -1,0 +1,15 @@
+﻿@page "/product"
+
+<h2>Product</h2>
+<h3>Brand: @BrandTitle</h3>
+<h3>Title: @Title</h3>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "brand")]
+    public string BrandTitle { set; get; } = "";
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string Title { set; get; } = "";
+}

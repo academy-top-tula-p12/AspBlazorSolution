@@ -1,0 +1,18 @@
+﻿@using BlazorInjectBindModelApp.Services
+
+@page "/"
+@inject ITimeService Timer
+@inject ITimeFormatter TimeFormatter
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+<h2>Time: @Timer.GetTime()</h2>
+<h2>Time: @TimerTwo.GetTime()</h2>
+<h2>@TimeFormatter.FormatTime()</h2>
+
+
+@code{
+    [Inject]
+    public required ITimeService TimerTwo { set; get; }
+}

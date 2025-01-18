@@ -1,0 +1,54 @@
+﻿@page "/empl"
+@using Microsoft.AspNetCore.Components.Web
+@using BlazorInjectBindModelApp.Models
+@rendermode RenderMode.InteractiveServer
+
+<h3>EmployeeForm</h3>
+<form>
+    <div>
+        <label>Name:</label><br />
+        <input type="text" @bind="employee.Name" />
+    </div>
+    <div>
+        <label>Birth Date:</label><br />
+        <input type="date" @bind="employee.BirthDate" />
+    </div>
+    <div>
+        <label>Maried:</label><br />
+        <input type="checkbox" @bind="employee.Maried" />
+    </div>
+    <div>
+        <label>Gender:</label><br />
+        <input type="radio" name="gender" @onchange="@(() => employee.Gender = "Male")" /> Male
+        <input type="radio" name="gender" @onchange="@(() => employee.Gender = "Female")" /> Female
+    </div>
+    <div>
+        <label>Skills:</label><br />
+        <select multiple @bind="skills">
+            <option value="c++">C++</option>
+            <option value="c#">C#</option>
+            <option value="javascript">JavaScript</option>
+            <option value="sql">SQL</option>
+            <option value="Java">Java</option>
+        </select>
+    </div>
+</form>
+
+<div>
+    <p>Name: @employee.Name</p>
+    <p>Birth Date: @employee.BirthDate.ToLongDateString()</p>
+    <p>Married: @((employee.Maried) ? "Married" : "Single")</p>
+    <p>Gender: @employee.Gender</p>
+    <p>Skills: @String.Join(", ", skills)</p>
+</div>
+
+@code {
+    Employee employee = new();
+
+    string[] skills = [];
+
+    void SkillChange()
+    {
+        employee.Skills = new List<string>(skills);
+    }
+}

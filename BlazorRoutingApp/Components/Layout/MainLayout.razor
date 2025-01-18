@@ -1,0 +1,36 @@
+﻿@inherits LayoutComponentBase
+
+<style>
+    a{
+        color: darkred;
+    }
+
+    a.active{
+        color: blueviolet;
+    }
+
+    .activeLink{
+        color: cadetblue;
+    }
+</style>
+
+@* <div> *@
+@*     <a href="/">Home</a> | <a href="/user">User</a> | <a href="/about">About</a> | <a href="/settings">Settings</a> | <a href="/admin/home">Admin</a> *@
+@* </div> *@
+
+<div>
+    <NavLink ActiveClass="activeLink" Match="NavLinkMatch.All" href="/">Home</NavLink> |
+    <NavLink ActiveClass="activeLink" href="/product?brand=microsoft&title=windows11">Product</NavLink> |
+    <NavLink ActiveClass="activeLink" href="/user/bobby">User</NavLink> |
+    <NavLink ActiveClass="activeLink" href="/about">About</NavLink> |
+    <NavLink ActiveClass="activeLink" href="/settings">Settings</NavLink> |
+    <NavLink ActiveClass="activeLink" href="/admin/home">Admin</NavLink>
+</div>
+
+@Body
+
+@* <div id="blazor-error-ui"> *@
+@*     An unhandled error has occurred. *@
+@*     <a href="" class="reload">Reload</a> *@
+@*     <a class="dismiss">🗙</a> *@
+@* </div> *@
