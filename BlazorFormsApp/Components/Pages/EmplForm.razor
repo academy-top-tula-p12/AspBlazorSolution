@@ -1,0 +1,95 @@
+﻿@page "/emplform"
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Forms
+
+@rendermode RenderMode.InteractiveServer
+<style>
+    .validation-errors{
+        font-family: Calibri, sans-serif;
+        list-style-type: none;
+    }
+
+    .validation-message{
+        font-family: Calibri, sans-serif;
+        margin-bottom: 20px;
+    }
+</style>
+
+
+<h3>Employee EditForm</h3>
+
+<EditForm EditContext="context" OnValidSubmit="InfoConsole">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label>Name:</label><br />
+        <InputText @bind-Value="employee.Name" />
+        <ValidationMessage For="@(() => employee.Name)" />
+    </div>
+
+    <div>
+        <label>Birth Date:</label><br />
+        <InputDate @bind-Value="employee.BirthDate" />
+    </div>
+
+    <div>
+        <label>Salary:</label><br />
+        <InputNumber @bind-Value="employee.Salary" ParsingErrorMessage="Необходимо число" />
+    </div>
+
+    <div>
+        <label>Married:</label>
+        <InputCheckbox @bind-Value="employee.Married" />
+    </div>
+
+    <div>
+        <InputRadioGroup @bind-Value="employee.Gender">
+            <label>Gender:</label><br />
+            @foreach (var g in genders)
+            {
+                <InputRadio Value="@g" />@g<br />
+            }
+        </InputRadioGroup>
+    </div>
+
+    <div>
+        <label>Skills:</label><br />
+        <InputSelect @bind-Value="employee.Skills" multiple>
+            @foreach (var s in skills)
+            {
+                <option value="@s">@s</option>
+            }
+        </InputSelect>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</EditForm>
+
+@code {
+    Models.Employee employee = new();
+    EditContext? context;
+
+    List<string> genders = new() { "Male", "Female", "Kvadrober" };
+    List<string> skills = new() { "C++", "C#", "JavaScript", "Sql" };
+
+    protected override void OnInitialized()
+    {
+        context = new EditContext(employee);
+    }
+
+    void InfoConsole()
+    {
+        if(context is not null && context.Validate())
+        {
+            Console.WriteLine($"{employee.Name}");
+            Console.WriteLine($"{employee.BirthDate.ToShortDateString()}");
+            Console.WriteLine($"{employee.Salary}");
+            Console.WriteLine($"{employee.Married}");
+            Console.WriteLine($"{employee.Gender}");
+            foreach (var s in employee.Skills)
+                Console.WriteLine($"\t{s}");
+        }
+    }
+}
